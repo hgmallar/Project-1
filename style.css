@@ -1,0 +1,121 @@
+body { background: url(https://unleashed.bancroftschool.org/wp-content/uploads/2018/04/travel-900x675.jpg) no-repeat;
+        background-size: 100%,100%;
+}
+
+
+header{
+    text-align: center;
+    font-weight: bold;
+    height: 100px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    margin-bottom: 2%;
+    font-size: 50px;
+
+
+    
+    
+    
+}
+
+
+
+
+
+#maparea{ width: 30%;
+    height: 200px;
+    float: left;
+    background-color: aqua;
+    margin-left: 2%;
+    margin-bottom: 2%;
+    border-radius: 20px;
+    margin-top: 4%
+}
+
+#weatherarea{
+    width: 60%;
+    height: 200px;
+    float: right;
+    background-color: brown;
+    margin-left: 2%;
+    margin-bottom: 2%;
+    border-radius: 20px;
+    margin-top: 4%;
+    margin-right: 2%
+}
+
+#eventsarea{
+    margin: auto;
+    margin-top: 4%;
+    width: 50%;
+    height: 200px;
+    float: center;
+    background-color: blueviolet;
+    clear: both;
+    border-radius: 20px;
+
+
+}
+
+@media screen and (max-width: 768px) {
+    body { background: url(https://unleashed.bancroftschool.org/wp-content/uploads/2018/04/travel-900x675.jpg) no-repeat;
+        background-size: 100%,100%;
+            }
+
+
+    #maparea{width: 100%;
+
+    }
+
+    #weatherarea {width: 100%;
+
+    }
+
+    #eventsarea {width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 320px) {
+    body { background: url(https://unleashed.bancroftschool.org/wp-content/uploads/2018/04/travel-900x675.jpg) no-repeat;
+        background-size: 100%,100%;
+            }
+
+
+    #maparea{width: 100%;
+
+    }
+
+    #weatherarea {width: 100%;
+
+    }
+
+    #eventsarea {width: 100%;
+    }
+}
+  
+
+@media screen and (max-width: 168px) {
+    body { background: url(https://unleashed.bancroftschool.org/wp-content/uploads/2018/04/travel-900x675.jpg) no-repeat;
+        background-size: 100%,100%;
+            }
+
+
+    #maparea{width: 100%;
+
+    }
+
+    #weatherarea {width: 100%;
+
+    }
+
+    #eventsarea {width: 100%;
+    }
+
+}
+  
+
+
+    
+
