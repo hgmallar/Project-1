@@ -31,6 +31,9 @@ $(document).on("click", ".submit-button", function (event) {
         method: "GET"
     }).then(function (response) {
 
+    var queryUrl2 ="https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US"
+    
+
         $.ajax({
             type:"GET",
             url:"https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=tvUTVI2iiCqaDja6l48lucGqABUD4KWS",
