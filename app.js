@@ -30,6 +30,23 @@ $(document).on("click", ".submit-button", function (event) {
         url: queryUrl,
         method: "GET"
     }).then(function (response) {
+
+        $.ajax({
+            type:"GET",
+            url:"https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=tvUTVI2iiCqaDja6l48lucGqABUD4KWS",
+            async:true,
+            dataType: "json",
+            success: function(json) {
+                        console.log(json);
+                        // Parse the response.
+                        // Do other things.
+                     },
+            error: function(xhr, status, err) {
+                        // This time, we do not end up here!
+                     }
+        });
+        
+
         console.log(response);
         $("tbody").empty();
         for (var i = 0; i < response.list.length; i++) {
