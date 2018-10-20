@@ -7,48 +7,39 @@ $(document).on("click", ".submit-button", function (event) {
 
     var city = $("#city-input").val().trim();
     var state = $("#state-input").val().trim();
-    //update map
-
-
-
-    //update events
-
-
-
 
     //update weather table
-    var queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q="
+    var queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q=";
     queryUrl += city;
     queryUrl += ",";
     queryUrl += state;
     queryUrl += ",us";
     queryUrl += "&units=imperial";
     queryUrl += "&appid=e307e80a57e9ae32c5039265b1a6d235";
-    console.log(queryUrl);
 
     $.ajax({
         url: queryUrl,
         method: "GET"
     }).then(function (response) {
 
-    var queryUrl2 ="https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US"
-    
+        var queryUrl2 = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US";
+
 
         $.ajax({
-            type:"GET",
-            url:"https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=tvUTVI2iiCqaDja6l48lucGqABUD4KWS",
-            async:true,
+            type: "GET",
+            url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=tvUTVI2iiCqaDja6l48lucGqABUD4KWS",
+            async: true,
             dataType: "json",
-            success: function(json) {
-                        console.log(json);
-                        // Parse the response.
-                        // Do other things.
-                     },
-            error: function(xhr, status, err) {
-                        // This time, we do not end up here!
-                     }
+            success: function (json) {
+                console.log(json);
+                // Parse the response.
+                // Do other things.
+            },
+            error: function (xhr, status, err) {
+                // This time, we do not end up here!
+            }
         });
-        
+
 
         console.log(response);
         $("tbody").empty();
@@ -60,7 +51,7 @@ $(document).on("click", ".submit-button", function (event) {
 
             if (i == 0) {
                 var newRow = $("<tr  class='by-1'>");
-                newRow.append($("<td scope='col' class='w-col'>").text(date));
+                newRow.append($("<td scope='col' class='w-col header-bold align-middle'>").text(date));
                 //first time through, figure out where to start in the table
                 if (time === "00") {
                     endRow = 7;
@@ -94,7 +85,7 @@ $(document).on("click", ".submit-button", function (event) {
             else if (endRow === 7) {
                 //starting a new row in the table
                 var newRow = $("<tr>");
-                newRow.append($("<td scope='col' class='w-col'>").text(date));
+                newRow.append($("<td scope='col' class='w-col header-bold align-middle'>").text(date));
             }
 
             var newCol = $("<td scope='col' class='w-col'>");
@@ -115,10 +106,11 @@ $(document).on("click", ".submit-button", function (event) {
                 //move to the next column
                 endRow--;
             }
-
-            console.log(response.list[i].main.temp_min);
-            console.log(response.list[i].main.temp_max);
-            console.log(response.list[i].weather[0].main);
         }
+
     });
+
+    //clear the inputs
+    $("#city-input").val("");
+    $("#state-input").val("");
 });

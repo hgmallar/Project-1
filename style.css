@@ -19,11 +19,21 @@ header{
 
 .w-col{
     width: 10%;
-    padding-bottom: 1.5%;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center; 
+}
+
+.header-bold {
+    font-weight: bold;
 }
 
 .wp{
     text-align: center; 
+    margin-bottom: 0.1rem;
+}
+
+.form-group{
+    margin: 0 auto !important;
 }
 
 
@@ -49,8 +59,13 @@ header{
     margin-right: 2%;
     padding: 1%;
     text-align: center;
-    overflow-y: auto;
+    overflow-y: auto;    
 }
+
+.table-dark{
+    background-color: brown;
+}
+
 
 #eventsarea{
     margin: auto;
