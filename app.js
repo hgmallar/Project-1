@@ -4,6 +4,9 @@ var endRow = 0;
 //when the submit button is clicked
 $(document).on("click", ".submit-button", function (event) {
     event.preventDefault();
+
+    var city = $("#city-input").val().trim();
+    var state = $("#state-input").val().trim();
     //update map
 
 
@@ -15,10 +18,11 @@ $(document).on("click", ".submit-button", function (event) {
 
     //update weather table
     var queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q="
-    queryUrl += "London";
-    queryUrl += ","
-    queryUrl += "uk";
-    queryUrl += "&units=imperial"
+    queryUrl += city;
+    queryUrl += ",";
+    queryUrl += state;
+    queryUrl += ",us";
+    queryUrl += "&units=imperial";
     queryUrl += "&appid=e307e80a57e9ae32c5039265b1a6d235";
     console.log(queryUrl);
 
@@ -27,6 +31,7 @@ $(document).on("click", ".submit-button", function (event) {
         method: "GET"
     }).then(function (response) {
         console.log(response);
+        $("tbody").empty();
         for (var i = 0; i < response.list.length; i++) {
             var dateTime = response.list[i].dt_txt.split(" ");
             var date = dateTime[0];
@@ -74,8 +79,7 @@ $(document).on("click", ".submit-button", function (event) {
             }
 
             var newCol = $("<td scope='col'>");
-            newCol.append($("<p>").text("Min: " + response.list[i].main.temp_min + "\u00B0F"));
-            newCol.append($("<p>").text("Max: " + response.list[i].main.temp_max + "\u00B0F"));
+            newCol.append($("<p>").text(response.list[i].main.temp + "\u00B0F"));
             newCol.append($("<p>").text(response.list[i].weather[0].main));
             newRow.append(newCol);
 
