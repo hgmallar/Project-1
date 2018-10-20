@@ -53,12 +53,11 @@ $(document).on("click", ".submit-button", function (event) {
             var dateTime = response.list[i].dt_txt.split(" ");
             var date = dateTime[0];
             var time = dateTime[1].trim().substring(0, 2);
-            console.log(date);
-            console.log(time);
+            date = moment(date, "YYYY-MM-DD").format('dddd');
 
             if (i == 0) {
-                var newRow = $("<tr>");
-                newRow.append($("<td scope='col'>").text(date));
+                var newRow = $("<tr  class='by-1'>");
+                newRow.append($("<td scope='col' class='w-col'>").text(date));
                 //first time through, figure out where to start in the table
                 if (time === "00") {
                     endRow = 7;
@@ -86,18 +85,18 @@ $(document).on("click", ".submit-button", function (event) {
                 }
                 //add blank columns to table accordingly
                 for (var j = endRow; j < 7; j++) {
-                    newRow.append($("<td scope='col'>"));
+                    newRow.append($("<td scope='col' class='w-col'>"));
                 }
             }
             else if (endRow === 7) {
                 //starting a new row in the table
                 var newRow = $("<tr>");
-                newRow.append($("<td scope='col'>").text(date));
+                newRow.append($("<td scope='col' class='w-col'>").text(date));
             }
 
-            var newCol = $("<td scope='col'>");
-            newCol.append($("<p>").text(response.list[i].main.temp + "\u00B0F"));
-            newCol.append($("<p>").text(response.list[i].weather[0].main));
+            var newCol = $("<td scope='col' class='w-col'>");
+            newCol.append($("<p class='wp'>").text(response.list[i].main.temp + "\u00B0F"));
+            newCol.append($("<p class='wp'>").text(response.list[i].weather[0].main));
             newRow.append(newCol);
 
             if (endRow === 0) {

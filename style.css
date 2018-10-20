@@ -1,26 +1,30 @@
 body { background: url(https://unleashed.bancroftschool.org/wp-content/uploads/2018/04/travel-900x675.jpg) no-repeat;
         background-size: 100%,100%;
 }
-
+html{
+ color: white;
+}
 
 header{
     text-align: center;
     font-weight: bold;
-    height: 100px;
+    padding: 2% 0;
     width: 100%;
     background-color: black;
     color: white;
-    margin-bottom: 2%;
+    margin: auto;
     font-size: 50px;
-
-
-    
-    
-    
+    vertical-align: middle;
 }
 
+.w-col{
+    width: 10%;
+    padding-bottom: 1.5%;
+}
 
-
+.wp{
+    text-align: center; 
+}
 
 
 #maparea{ width: 30%;
@@ -42,7 +46,10 @@ header{
     margin-bottom: 2%;
     border-radius: 20px;
     margin-top: 4%;
-    margin-right: 2%
+    margin-right: 2%;
+    padding: 1%;
+    text-align: center;
+    overflow-y: auto;
 }
 
 #eventsarea{
