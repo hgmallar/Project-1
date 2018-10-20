@@ -2,7 +2,8 @@
 var endRow = 0;
 
 //when the submit button is clicked
-$(document).on("click", ".submit-button", function () {
+$(document).on("click", ".submit-button", function (event) {
+    event.preventDefault();
     //update map
 
 
