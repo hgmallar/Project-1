@@ -40,6 +40,21 @@ $(document).on("click", ".submit-button", function (event) {
             }
         });
 
+         ///MAP API CODE DONE
+
+        //URL: https://maps.googleapis.com/maps/api/staticmap?center=Chapel%20Hill,NC&zoom=13&size=600x400&maptype=roadmap&key=AIzaSyC8fZcU3HJ2jihLd3KxN6-XV1Itwot6LgA
+        //API: AIzaSyCCcr95yw_abVJ7PV3GxQtMiYqRA-py-vw
+        //Garcian Code
+        var queryUrl = "https://maps.googleapis.com/maps/api/staticmap?center="
+        queryUrl += city;
+        queryUrl += ",";
+        queryUrl += state;
+        queryUrl += "&zoom=13&size=600x400&maptype=roadmap";
+        queryUrl += "&key=AIzaSyCCcr95yw_abVJ7PV3GxQtMiYqRA-py-vw";
+        console.log(queryUrl);
+
+
+        /////END MAP API CODE
 
         console.log(response);
         $("tbody").empty();
