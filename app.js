@@ -7,24 +7,15 @@ $(document).on("click", ".submit-button", function (event) {
 
     var city = $("#city-input").val().trim();
     var state = $("#state-input").val().trim();
-    //update map
-
-
-
-    //update events
-
-
-
 
     //update weather table
-    var queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q="
+    var queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q=";
     queryUrl += city;
     queryUrl += ",";
     queryUrl += state;
     queryUrl += ",us";
     queryUrl += "&units=imperial";
     queryUrl += "&appid=e307e80a57e9ae32c5039265b1a6d235";
-    console.log(queryUrl);
 
 
 
@@ -43,19 +34,34 @@ $(document).on("click", ".submit-button", function (event) {
             type:"GET",
             url:"https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US" + "&stateCode=" + state + "&city="+ city + "&apikey=" + apikey,
             async:true,
+
             dataType: "json",
-            success: function(json) {
-                        console.log(json);
-                        // Parse the response.
-                        // Do other things.
-                     },
-            error: function(xhr, status, err) {
-                        // This time, we do not end up here!
-                     }
+            success: function (json) {
+                console.log(json);
+                // Parse the response.
+                // Do other things.
+            },
+            error: function (xhr, status, err) {
+                // This time, we do not end up here!
+            }
         });
 
 
-        
+         ///MAP API CODE DONE
+
+        //URL: https://maps.googleapis.com/maps/api/staticmap?center=Chapel%20Hill,NC&zoom=13&size=600x400&maptype=roadmap&key=AIzaSyC8fZcU3HJ2jihLd3KxN6-XV1Itwot6LgA
+        //API: AIzaSyCCcr95yw_abVJ7PV3GxQtMiYqRA-py-vw
+        //Garcian Code
+        var queryUrl = "https://maps.googleapis.com/maps/api/staticmap?center="
+        queryUrl += city;
+        queryUrl += ",";
+        queryUrl += state;
+        queryUrl += "&zoom=13&size=600x400&maptype=roadmap";
+        queryUrl += "&key=AIzaSyCCcr95yw_abVJ7PV3GxQtMiYqRA-py-vw";
+        console.log(queryUrl);
+
+
+        /////END MAP API CODE
 
         console.log(response);
         $("tbody").empty();
@@ -63,12 +69,11 @@ $(document).on("click", ".submit-button", function (event) {
             var dateTime = response.list[i].dt_txt.split(" ");
             var date = dateTime[0];
             var time = dateTime[1].trim().substring(0, 2);
-            console.log(date);
-            console.log(time);
+            date = moment(date, "YYYY-MM-DD").format('dddd');
 
             if (i == 0) {
-                var newRow = $("<tr>");
-                newRow.append($("<td scope='col'>").text(date));
+                var newRow = $("<tr  class='by-1'>");
+                newRow.append($("<td scope='col' class='w-col header-bold align-middle'>").text(date));
                 //first time through, figure out where to start in the table
                 if (time === "00") {
                     endRow = 7;
@@ -96,18 +101,18 @@ $(document).on("click", ".submit-button", function (event) {
                 }
                 //add blank columns to table accordingly
                 for (var j = endRow; j < 7; j++) {
-                    newRow.append($("<td scope='col'>"));
+                    newRow.append($("<td scope='col' class='w-col'>"));
                 }
             }
             else if (endRow === 7) {
                 //starting a new row in the table
                 var newRow = $("<tr>");
-                newRow.append($("<td scope='col'>").text(date));
+                newRow.append($("<td scope='col' class='w-col header-bold align-middle'>").text(date));
             }
 
-            var newCol = $("<td scope='col'>");
-            newCol.append($("<p>").text(response.list[i].main.temp + "\u00B0F"));
-            newCol.append($("<p>").text(response.list[i].weather[0].main));
+            var newCol = $("<td scope='col' class='w-col'>");
+            newCol.append($("<p class='wp'>").text(response.list[i].main.temp + "\u00B0F"));
+            newCol.append($("<p class='wp'>").text(response.list[i].weather[0].main));
             newRow.append(newCol);
 
             if (endRow === 0) {
@@ -123,10 +128,11 @@ $(document).on("click", ".submit-button", function (event) {
                 //move to the next column
                 endRow--;
             }
-
-            console.log(response.list[i].main.temp_min);
-            console.log(response.list[i].main.temp_max);
-            console.log(response.list[i].weather[0].main);
         }
+
     });
+
+    //clear the inputs
+    $("#city-input").val("");
+    $("#state-input").val("");
 });
