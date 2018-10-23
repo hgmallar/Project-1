@@ -17,18 +17,24 @@ $(document).on("click", ".submit-button", function (event) {
     queryUrl += "&units=imperial";
     queryUrl += "&appid=e307e80a57e9ae32c5039265b1a6d235";
 
+
+
     $.ajax({
         url: queryUrl,
         method: "GET"
     }).then(function (response) {
 
-        var queryUrl2 = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US";
+   
+
+    var apikey="tvUTVI2iiCqaDja6l48lucGqABUD4KWS";
+
 
 
         $.ajax({
-            type: "GET",
-            url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=tvUTVI2iiCqaDja6l48lucGqABUD4KWS",
-            async: true,
+            type:"GET",
+            url:"https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US" + "&stateCode=" + state + "&city="+ city + "&apikey=" + apikey,
+            async:true,
+
             dataType: "json",
             success: function (json) {
                 console.log(json);
@@ -39,6 +45,7 @@ $(document).on("click", ".submit-button", function (event) {
                 // This time, we do not end up here!
             }
         });
+
 
          ///MAP API CODE DONE
 
