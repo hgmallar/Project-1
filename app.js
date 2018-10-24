@@ -3,44 +3,53 @@ var endRow = 0;
 var inputValid = true;
 var errorString = "";
 
+function initialize() {
+    var options = {
+        types: ['(cities)'],
+        componentRestrictions: { country: "us" }
+    };
+
+    var input = document.getElementById("city-input");
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+
 //when the submit button is clicked
 $(document).on("click", ".submit-button", function (event) {
     event.preventDefault();
 
-    var city = $("#city-input").val().trim();
-    var state = $("#state-input").val().trim();
-
-    city = city.toLowerCase();
-    state = state.toLowerCase();
-    
-    console.log(city);
-    console.log(state);
-
-    if (!/./.test(city)) {
-        errorString += " You must enter a city."
+    var result = $("#city-input").val();
+    if (!/./.test(result)) {
+        errorString = "You must enter a city, state, and country."
         inputValid = false;
         console.log("HERE1");
     }
-    else if (/[^a-z]/.test(city)) {
-        errorString += " Your city is invalid."
+    if (!/\b, \b/.test(result)) {
+        errorString = "You must enter a city, state, and country."
         inputValid = false;
-        console.log("HERE2");
+        console.log("HERE1");
     }
-
-    if (!/./.test(state)) {
-        errorString += " You must enter a state."
-        inputValid = false;
-        console.log("HERE3");
-    }
-    else if ((state.length !== 2) || (/[^a-z]/.test(state))) {
-        errorString += " Your state is invalid."
-        inputValid = false;
-        console.log("HERE4");
-    }
-
-    console.log(inputValid);
 
     if (inputValid) {
+        result = result.trim().split(",");
+        if (result.length === 3) {
+            var city = result[0];
+            var state = result[1].trim();
+            var country = result[2].trim();
+        }
+        else {
+            var city = result[0];
+            var state = "";
+            var country = result[1].trim();
+        }
+
+        console.log(city);
+        console.log(state);
+        console.log(country);
+
+        console.log(inputValid);
+
+
         ///MAP API CODE DONE
 
         //URL: https://maps.googleapis.com/maps/api/staticmap?center=Chapel%20Hill,NC&zoom=13&size=600x400&maptype=roadmap&key=AIzaSyC8fZcU3HJ2jihLd3KxN6-XV1Itwot6LgA
@@ -77,7 +86,7 @@ $(document).on("click", ".submit-button", function (event) {
                     $("#events").append($("<td scope='col' class='w-col header-bold align-middle'>").text(json._embedded.events[i].name));
 
                 }
-           },
+            },
             error: function (xhr, status, err) {
                 // This time, we do not end up here!
             },
@@ -90,7 +99,8 @@ $(document).on("click", ".submit-button", function (event) {
         queryUrl += city;
         queryUrl += ",";
         queryUrl += state;
-        queryUrl += ",us";
+        queryUrl += ",";
+        queryUrl += country;
         queryUrl += "&units=imperial";
         queryUrl += "&appid=e307e80a57e9ae32c5039265b1a6d235";
 
@@ -166,10 +176,16 @@ $(document).on("click", ".submit-button", function (event) {
                 }
             }
 
+        }).fail(function () {
+            errorString = "Invalid input.  Try again";
+            $("#errorMessage").text(errorString);
+            $("#myModal").modal("show");
+            errorString = "";
+            inputValid = true;
+            $("tbody").empty();
         });
     }
     else {
-
         $("#errorMessage").text(errorString);
         $("#myModal").modal("show");
         errorString = "";
