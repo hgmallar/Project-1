@@ -10,6 +10,7 @@ $(document).on("click", ".submit-button", function (event) {
     var city = $("#city-input").val().trim();
     var state = $("#state-input").val().trim();
 
+
     console.log(city);
     console.log(state);
 
@@ -69,24 +70,41 @@ $(document).on("click", ".submit-button", function (event) {
             method: "GET"
         }).then(function (response) {
 
-            var queryUrl2 = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US";
+          var apikey="tvUTVI2iiCqaDja6l48lucGqABUD4KWS";
 
 
-            $.ajax({
-                type: "GET",
-                url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=tvUTVI2iiCqaDja6l48lucGqABUD4KWS",
-                async: true,
-                dataType: "json",
-                success: function (json) {
-                    console.log(json);
-                    // Parse the response.
-                    // Do other things.
-                },
-                error: function (xhr, status, err) {
-                    // This time, we do not end up here!
+
+        $.ajax({
+            type:"GET",
+            url:"https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US" + "&stateCode=" + state + "&city="+ city + "&apikey=" + apikey,
+            async:true,
+
+            dataType: "json",
+            success: function (json) {
+                console.log(json);
+                // Parse the response.
+                // Do other things.
+            },
+            error: function (xhr, status, err) {
+                // This time, we do not end up here!
+            },
+            
+        });
+
+            console.log(json);
+            $("tbody").empty();
+            for (var i = 0; i < json.list.length; i++) {
+                var dateTime = json.list[i].dt_txt.split(" ");
+                var date = dateTime[0];
+                var time = dateTime[1].trim().substring(0, 2);
+                date = moment(date, "YYYY-MM-DD").format('dddd');
+
+                if(i===0){
+                    var newRow = $("<tr  class='by-1'>");
+                    newRow.append($("<td scope='col' class='w-col header-bold align-middle'>").text(date));
+
                 }
-            });
-
+            }
             console.log(response);
             $("tbody").empty();
             for (var i = 0; i < response.list.length; i++) {
