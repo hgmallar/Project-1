@@ -43,8 +43,24 @@ $(document).on("click", ".submit-button", function (event) {
             },
             error: function (xhr, status, err) {
                 // This time, we do not end up here!
-            }
+            },
+            
         });
+
+            console.log(json);
+            $("tbody").empty();
+            for (var i = 0; i < json.list.length; i++) {
+                var dateTime = json.list[i].dt_txt.split(" ");
+                var date = dateTime[0];
+                var time = dateTime[1].trim().substring(0, 2);
+                date = moment(date, "YYYY-MM-DD").format('dddd');
+
+                if(i===0){
+                    var newRow = $("<tr  class='by-1'>");
+                    newRow.append($("<td scope='col' class='w-col header-bold align-middle'>").text(date));
+
+                }
+            }
 
 
          ///MAP API CODE DONE
