@@ -59,9 +59,13 @@ $(document).on("click", ".submit-button", function (event) {
         queryUrl += city;
         queryUrl += ",";
         queryUrl += state;
-        queryUrl += "&zoom=13&size=600x400&maptype=roadmap";
+        queryUrl += "&zoom=13&size=450x400&maptype=roadmap";
         queryUrl += "&key=AIzaSyCCcr95yw_abVJ7PV3GxQtMiYqRA-py-vw";
         console.log(queryUrl);
+
+        //
+        $("#maparea").empty();
+        $("#maparea").append(`<img id='theImg' src='${queryUrl}'/>`);
 
 
         /////END MAP API CODE
