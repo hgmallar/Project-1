@@ -82,7 +82,6 @@ $(document).on("click", ".submit-button", function (event) {
                 // Do other things.
                 $("#events").empty();
                 console.log(json._embedded.events);
-                console.log(url);
                 for (var i = 0; i < json._embedded.events.length; i++){
                     var newRow = $("<tr>");
                     var newCol1 =$("<td>");
