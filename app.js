@@ -57,11 +57,13 @@ $(document).on("click", ".submit-button", function (event) {
 
         /////END MAP API CODE
         var apikey = "tvUTVI2iiCqaDja6l48lucGqABUD4KWS";
+        var size="";
+        var sort="";
 
 
         $.ajax({
             type: "GET",
-            url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US" + "&stateCode=" + state + "&city=" + city + "&apikey=" + apikey,
+            url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US" + "&stateCode=" + state + "&city=" + city +"&sort=date,asc" + sort + "&size=5" + size +  "&apikey=" + apikey,
             async: true,
 
             dataType: "json",
@@ -71,11 +73,18 @@ $(document).on("click", ".submit-button", function (event) {
                 // Do other things.
                 $("#events").empty();
                 console.log(json._embedded.events);
-                for (var i = 0; i < json._embedded.events.length; i++) {
+                console.log(url);
+                for (var i = 0; i < json._embedded.events.length; i++){
                     var newRow = $("<tr>");
-                    newRow.text(json._embedded.events[i].name);
-                    $("#events").append($("<td scope='col' class='w-col header-bold align-middle'>").text(json._embedded.events[i].name));
-
+                    var newCol1 =$("<td>");
+                    newCol1.addClass("text-center").addClass("font-weight-bold");
+                    var date=json._embedded.events[i].dates.start.localDate;
+                    date = moment(date, "YYYY-MM-DD").format('dddd');
+                    newCol1.text(date);
+                    var newCol2= $("<td>");
+                    newCol2.text(json._embedded.events[i].name);
+                    newRow.append(newCol1).append(newCol2)
+                    $("#events").append(newRow)
                 }
            },
             error: function (xhr, status, err) {
