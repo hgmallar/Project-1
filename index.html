@@ -7,14 +7,15 @@
     <title>Travel Ready</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- reset.css -->
     <link rel="stylesheet" type="text/css" href="reset.css">
-
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+    <!-- style.css -->
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 
     <!--Google Fonts-->
@@ -28,32 +29,28 @@
 <body>
     <header>Travel Ready</header>
 
-    <div id="somebanner" class="somebanner-bgsearch-red hero1 hidden-xs">
-        <div class="container-fluid">
-            <div class="top-section">
-
-
-                <form class="form-inline form-group justify-content-center">
-                    <input type="text" class="form-control my-2 mr-sm-2" id="city-input" placeholder="City, State, Country">
-
-                    <button type="submit" class="btn btn-primary my-2 submit-button">Submit</button>
-                </form>
-
-            </div>
+    <!--Input-->
+    <div class="container-fluid">
+        <div class="top-section">
+            <form class="form-inline form-group justify-content-center">
+                <input type="text" class="form-control my-2 mr-sm-2" id="city-input" placeholder="City, State, Country">
+                <button type="submit" class="btn btn-primary my-2 submit-button">Submit</button>
+            </form>
         </div>
     </div>
 
-    <div class="container">
+
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-5">
-                <div id="maparea"></div>
+            <div class="col-md-6">
+                <!--Map-->
+                <div id="maparea" class="text-center"></div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <div class="row">
+                    <!--Weather-->
                     <div id="weatherarea">
-
                         <div class="weather-table">
-
                             <table class="table table-sm table-dark">
                                 <thead>
                                     <tr>
@@ -75,20 +72,18 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div id="eventsarea">
+                    <!--Events-->
+                    <div id="eventsarea" class="text-center">
                         <div class="event-table">
                             <table class="table table-md table-md table-dark">
                                 <thead>
                                     <tr>
-
                                         <th scope="col" class=" border-top-0 header-bold text-center"> Day </th>
                                         <th scope="col" class=" border-top-0 header-bold"> Event </th>
-
                                     </tr>
                                 </thead>
                                 <tbody id="events">
                                 </tbody>
-
                             </table>
                         </div>
                     </div>
@@ -96,11 +91,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -119,7 +109,9 @@
         </div>
     </div>
 
+    <!--Autocomplete-->
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyC8fZcU3HJ2jihLd3KxN6-XV1Itwot6LgA"></script>
+    <!--app.js-->
     <script type="text/javascript" src="app.js"></script>
 </body>
 
