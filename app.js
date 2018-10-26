@@ -69,42 +69,7 @@ $(document).on("click", ".submit-button", function (event) {
 
 
         /////END MAP API CODE
-        var apikey = "tvUTVI2iiCqaDja6l48lucGqABUD4KWS";
-        var size="";
-        var sort="";
-
-
-        $.ajax({
-            type: "GET",
-            url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US" + "&stateCode=" + state + "&city=" + city +"&sort=date,asc" + sort + "&size=5" + size +  "&apikey=" + apikey,
-            async: true,
-
-            dataType: "json",
-            success: function (json) {
-                console.log(json);
-                // Parse the response.
-                // Do other things.
-                $("#events").empty();
-                console.log(json._embedded.events);
-                for (var i = 0; i < json._embedded.events.length; i++){
-                    var newRow = $("<tr>");
-                    var newCol1 =$("<td>");
-                    newCol1.addClass("text-center").addClass("font-weight-bold");
-                    var date=json._embedded.events[i].dates.start.localDate;
-                    date = moment(date, "YYYY-MM-DD").format('dddd');
-                    newCol1.text(date);
-                    var newCol2= $("<td>");
-                    newCol2.text(json._embedded.events[i].name);
-                    newRow.append(newCol1).append(newCol2)
-                    $("#events").append(newRow)
-                }
-            },
-            error: function (xhr, status, err) {
-                // This time, we do not end up here!
-            },
-
-        });
-
+    
 
         //update weather table
         var queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q=";
@@ -122,7 +87,7 @@ $(document).on("click", ".submit-button", function (event) {
         }).then(function (response) {
 
             console.log(response);
-            $("tbody").empty();
+            $("#weather-body").empty();
             for (var i = 0; i < response.list.length; i++) {
                 var dateTime = response.list[i].dt_txt.split(" ");
                 var date = dateTime[0];
@@ -175,12 +140,12 @@ $(document).on("click", ".submit-button", function (event) {
 
                 if (endRow === 0) {
                     //at the end of the row, append the row
-                    $("tbody").append(newRow);
+                    $("#weather-body").append(newRow);
                     endRow = 7;
                 }
                 else if (i === response.list.length - 1) {
                     //at the end of the array, append the row
-                    $("tbody").append(newRow);
+                    $("#weather-body").append(newRow);
                 }
                 else {
                     //move to the next column
@@ -194,8 +159,43 @@ $(document).on("click", ".submit-button", function (event) {
             $("#myModal").modal("show");
             errorString = "";
             inputValid = true;
-            $("tbody").empty();
+            $("#weather-body").empty();
         });
+        var apikey = "tvUTVI2iiCqaDja6l48lucGqABUD4KWS";
+        var size = "";
+        var sort = "";
+
+
+        $.ajax({
+            url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US" + "&stateCode=" + state + "&city=" + city + "&sort=date,asc" + sort + "&size=5" + size + "&apikey=" + apikey,
+            method: "GET"
+        }).then(function (json) {
+            console.log(json);
+            $("#events").empty();
+            console.log(json._embedded.events);
+            for (var i = 0; i < json._embedded.events.length; i++) {
+                var newRow = $("<tr>");
+                var newCol1 = $("<td>");
+                newCol1.addClass("text-center").addClass("font-weight-bold");
+                var date = json._embedded.events[i].dates.start.localDate;
+                date = moment(date, "YYYY-MM-DD").format('dddd');
+                newCol1.text(date);
+                var newCol2 = $("<td>");
+                newCol2.text(json._embedded.events[i].name);
+                newRow.append(newCol1).append(newCol2)
+                $("#events").append(newRow)
+            }
+
+
+        }) .fail(function () {
+            errorString = "Invalid input.  Try again";
+            $("#errorMessage").text(errorString);
+            $("#myModal").modal("show");
+            errorString = "";
+            inputValid = true;
+            $("#events").empty();
+        });
+
     }
     else {
         $("#errorMessage").text(errorString);
