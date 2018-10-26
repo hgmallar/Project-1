@@ -9,11 +9,11 @@
 
     <link rel="stylesheet" type="text/css" href="reset.css">
 
-   
-   <!-- Bootstrap -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 
@@ -42,50 +42,66 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div id="maparea"></div>
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div id="weatherarea">
 
-    <div id="city"></div>
-    <div id="state"></div>
-    <div id="submit"></div>
-    <div id="maparea"></div>
-    <div id="weatherarea">
-        <div class="weather-table">
-            <table class="table table-sm table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col" class="w-col border-top-0 header-bold">Day</th>
-                        <th scope="col" class="w-col border-top-0 header-bold" id="00">12:00 AM</th>
-                        <th scope="col" class="w-col border-top-0 header-bold" id="03">3:00 AM</th>
-                        <th scope="col" class="w-col border-top-0 header-bold" id="06">6:00 AM</th>
-                        <th scope="col" class="w-col border-top-0 header-bold" id="09">9:00 AM</th>
-                        <th scope="col" class="w-col border-top-0 header-bold" id="12">12:00 PM</th>
-                        <th scope="col" class="w-col border-top-0 header-bold" id="15">3:00 PM</th>
-                        <th scope="col" class="w-col border-top-0 header-bold" id="18">6:00 PM</th>
-                        <th scope="col" class="w-col border-top-0 header-bold" id="21">9:00 PM</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div id="eventsarea">
-        <div class="event-table">
-            <table class="table table-md table-md table-dark">
-                <thead>
-                    <tr>
-      
-                    <th scope="col" class=" border-top-0 header-bold text-center"> Day </th>
-                    <th scope="col" class=" border-top-0 header-bold"> Event </th>
-                   
-                    </tr>
-                </thead>
-                <tbody id="events">
-                </tbody>
+                        <div class="weather-table">
 
-            </table>
+                            <table class="table table-sm table-dark">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="w-col border-top-0 header-bold">Day</th>
+                                        <th scope="col" class="w-col border-top-0 header-bold" id="00">12:00 AM</th>
+                                        <th scope="col" class="w-col border-top-0 header-bold" id="03">3:00 AM</th>
+                                        <th scope="col" class="w-col border-top-0 header-bold" id="06">6:00 AM</th>
+                                        <th scope="col" class="w-col border-top-0 header-bold" id="09">9:00 AM</th>
+                                        <th scope="col" class="w-col border-top-0 header-bold" id="12">12:00 PM</th>
+                                        <th scope="col" class="w-col border-top-0 header-bold" id="15">3:00 PM</th>
+                                        <th scope="col" class="w-col border-top-0 header-bold" id="18">6:00 PM</th>
+                                        <th scope="col" class="w-col border-top-0 header-bold" id="21">9:00 PM</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="eventsarea">
+                        <div class="event-table">
+                            <table class="table table-md table-md table-dark">
+                                <thead>
+                                    <tr>
+
+                                        <th scope="col" class=" border-top-0 header-bold text-center"> Day </th>
+                                        <th scope="col" class=" border-top-0 header-bold"> Event </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="events">
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
-    
+
+
+
+
+
+
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
