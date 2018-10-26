@@ -1,8 +1,20 @@
 //tells where to start in table
 var endRow = 0;
+//is input valid
 var inputValid = true;
+//error message string
 var errorString = "";
 
+//function to display error in Modal
+function displayError() {
+    $("#errorMessage").text(errorString);
+    $("#myModal").modal("show");
+    errorString = "";
+    inputValid = true;
+    $("tbody").empty();
+}
+
+//Autocomplete function
 function initialize() {
     var options = {
         types: ['(cities)'],
@@ -19,18 +31,19 @@ $(document).on("click", ".submit-button", function (event) {
     event.preventDefault();
 
     var result = $("#city-input").val();
+    //if the input is empty
     if (!/./.test(result)) {
         errorString = "You must enter a city, state, and country."
         inputValid = false;
-        console.log("HERE1");
     }
+    //if there is not a word a comma and another word
     if (!/\b, \b/.test(result)) {
         errorString = "You must enter a city, state, and country."
         inputValid = false;
-        console.log("HERE1");
     }
 
     if (inputValid) {
+        //get the input and split it into city, state, and country
         result = result.trim().split(",");
         if (result.length === 3) {
             var city = result[0];
@@ -43,15 +56,7 @@ $(document).on("click", ".submit-button", function (event) {
             var country = result[1].trim();
         }
 
-        console.log(city);
-        console.log(state);
-        console.log(country);
-
-        console.log(inputValid);
-
-
         ///MAP API CODE DONE
-
         //URL: https://maps.googleapis.com/maps/api/staticmap?center=Chapel%20Hill,NC&zoom=13&size=600x400&maptype=roadmap&key=AIzaSyC8fZcU3HJ2jihLd3KxN6-XV1Itwot6LgA
         //API: AIzaSyCCcr95yw_abVJ7PV3GxQtMiYqRA-py-vw
         //Garcian Code
@@ -61,17 +66,13 @@ $(document).on("click", ".submit-button", function (event) {
         queryUrl += state;
         queryUrl += "&zoom=13&size=450x400&maptype=roadmap";
         queryUrl += "&key=AIzaSyCCcr95yw_abVJ7PV3GxQtMiYqRA-py-vw";
-        console.log(queryUrl);
 
-        //
         $("#maparea").empty();
         $("#maparea").append(`<img id='theImg' src='${queryUrl}'/>`);
-
-
         /////END MAP API CODE
-    
 
-        //update weather table
+
+        ///WEATHER API CODE
         var queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q=";
         queryUrl += city;
         queryUrl += ",";
@@ -86,9 +87,10 @@ $(document).on("click", ".submit-button", function (event) {
             method: "GET"
         }).then(function (response) {
 
-            console.log(response);
+            //clear the table body and create the new rows to append
             $("#weather-body").empty();
             for (var i = 0; i < response.list.length; i++) {
+                //get the date returned by the data and use moment JS to convert it to the day of the week.
                 var dateTime = response.list[i].dt_txt.split(" ");
                 var date = dateTime[0];
                 var time = dateTime[1].trim().substring(0, 2);
@@ -154,25 +156,21 @@ $(document).on("click", ".submit-button", function (event) {
             }
 
         }).fail(function () {
-            errorString = "Invalid input.  Try again";
-            $("#errorMessage").text(errorString);
-            $("#myModal").modal("show");
-            errorString = "";
-            inputValid = true;
-            $("#weather-body").empty();
+            //if ajax data could not be returned
+            errorString = " Weather Data could not be found.";
+            displayError();
         });
+
+        ///EVENTS API CODE
         var apikey = "tvUTVI2iiCqaDja6l48lucGqABUD4KWS";
         var size = "";
         var sort = "";
-
 
         $.ajax({
             url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US" + "&stateCode=" + state + "&city=" + city + "&sort=date,asc" + sort + "&size=5" + size + "&apikey=" + apikey,
             method: "GET"
         }).then(function (json) {
-            console.log(json);
             $("#events").empty();
-            console.log(json._embedded.events);
             for (var i = 0; i < json._embedded.events.length; i++) {
                 var newRow = $("<tr>");
                 var newCol1 = $("<td>");
@@ -185,24 +183,15 @@ $(document).on("click", ".submit-button", function (event) {
                 newRow.append(newCol1).append(newCol2)
                 $("#events").append(newRow)
             }
-
-
-        }) .fail(function () {
-            errorString = "Invalid input.  Try again";
-            $("#errorMessage").text(errorString);
-            $("#myModal").modal("show");
-            errorString = "";
-            inputValid = true;
-            $("#events").empty();
+        }).fail(function () {
+            errorString = " Events Data could not be found.";
+            displayError();
         });
 
     }
     else {
-        $("#errorMessage").text(errorString);
-        $("#myModal").modal("show");
-        errorString = "";
-        inputValid = true;
-        $("tbody").empty();
+        //input data was invalid
+        displayError();
     }
 
     //clear the inputs
