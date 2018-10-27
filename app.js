@@ -167,7 +167,7 @@ $(document).on("click", ".submit-button", function (event) {
 
 
         $.ajax({
-            url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US" + "&stateCode=" + state + "&city=" + city + "&sort=date,asc" + sort + "&size=5" + size + "&apikey=" + apikey,
+            url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US" + "&stateCode=" + state + "&city=" + city + "&sort=date,asc" + sort + "&size=15" + size + "&apikey=" + apikey,
             method: "GET"
         }).then(function (json) {
             console.log(json);
