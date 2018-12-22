@@ -1,12 +1,14 @@
 # Project-1
 # Travel Ready
 
-###Inputs: 
+![frontpage image](project1.PNG)
+
+### Inputs: 
 * city 
 * state 
 * country
 
-###Results: 
+### Results: 
 * Gathers all of your travel information in one place: 
     * Weather
     * Map
